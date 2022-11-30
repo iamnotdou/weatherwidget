@@ -1,0 +1,82 @@
+const { svgs } = require("../svgs/index");
+
+function one(weatherData) {
+  return `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  role="img"
+  width="200"
+  height="200"
+>
+  <title xmlns="http://www.w3.org/2000/svg" id="cardTitle">
+    Weather on ${weatherData.city}
+  </title>
+  <foreignObject width="200" height="200">
+    <style>
+      @import "https://rsms.me/inter/inter.css";
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter var";
+      }
+      .widget {
+        width: 200px;
+        aspect-ratio: 1/1;
+        border-radius: 1rem;
+        background-color: #0f0f0f;
+        background-image: linear-gradient(0deg, black, rgb(22, 22, 22));
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        position: relative;
+        gap: 0.5rem;
+        color: white;
+      }
+      .widget_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+      }
+      .widget_top_city {
+        font-size: 1rem;
+      }
+      .widget_top_time {
+        font-size: 12px;
+      }
+      .widget_degree {
+        font-size: 48px;
+        font-weight: 600;
+      }
+      .widget_des {
+        font-size: 10px;
+        text-transform: capitalize;
+        font-weight: 500;
+      }
+    
+      .widget_wind {
+        font-size: 10px;
+        font-weight: 500;
+        color: gray;
+      }
+    </style>
+    <div class="widget" xmlns="http://www.w3.org/1999/xhtml">
+      <div class="widget_top">
+        <div class="widget_top_city">${weatherData.city}</div>
+        <div class="widget_top_time">${weatherData.time}</div>
+      </div>
+      <div class="widget_degree">${weatherData.degree}°</div>
+      ${svgs[weatherData.icon]}
+      <div class="widget_des">${weatherData.description}</div>
+      <div class="widget_wind">
+        W: ${weatherData.wind.speed}m/s ${weatherData.wind.deg}°
+      </div>
+    </div>
+  </foreignObject>
+</svg>`;
+}
+
+module.exports = {
+  one,
+};
